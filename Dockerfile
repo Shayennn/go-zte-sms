@@ -21,15 +21,17 @@ FROM build AS build-production
 
 RUN useradd -u 1001 appuser
 
+# ca-certificates is required for HTTPS
+RUN apt-get update && apt-get install -y ca-certificates && apt clean && rm -rf /var/lib/apt/lists/*
+
+RUN go mod download
+
 COPY src .
 
 RUN go build \
   -ldflags="-linkmode external -extldflags -static" \
   -tags netgo \
   -o zte-sms-read
-
-# ca-certificates is required for HTTPS
-RUN apt-get update && apt-get install -y ca-certificates
 
 FROM scratch
 

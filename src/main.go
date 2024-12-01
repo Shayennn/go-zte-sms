@@ -7,6 +7,7 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"time"
+	_ "time/tzdata"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/rs/cors"
@@ -31,6 +32,17 @@ func startPprofServer(pprofListenAddr string) {
 }
 
 func main() {
+
+	if tz := os.Getenv("TZ"); tz != "" {
+		var err error
+		time.Local, err = time.LoadLocation(tz)
+		if err != nil {
+			log.Printf("error loading location '%s': %v\n", tz, err)
+		}
+	}
+	// Show the timezone
+	log.Printf("Timezone: %s", time.Now().Location())
+
 	// Create a new ServeMux
 	mux := http.NewServeMux()
 	mux.HandleFunc("/getSMS", getSMSHandler)
