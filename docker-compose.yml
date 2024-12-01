@@ -1,6 +1,7 @@
 services:
   zte-sms-read:
     build: .
+    restart: unless-stopped
     env_file:
       - .env
     ports:
