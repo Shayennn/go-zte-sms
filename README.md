@@ -2,7 +2,29 @@
 
 This project provides an HTTP server to interact with a ZTE router to retrieve SMS messages 📩. It supports Docker-based development 🐳 and deployment and includes a `pprof` performance profiling server 📈.
 
----
+- [🚀 ZTE SMS HTTP Server](#-zte-sms-http-server)
+  - [🌟 Features](#-features)
+  - [🛠️ Getting Started](#️-getting-started)
+    - [📋 Prerequisites](#-prerequisites)
+  - [⚙️ Configuration](#️-configuration)
+    - [🔧 Environment Variables](#-environment-variables)
+  - [🧑‍💻 Development](#-development)
+    - [🐳 Run Locally with Docker Compose](#-run-locally-with-docker-compose)
+  - [🚀 Production Deployment](#-production-deployment)
+    - [🏗️ Build the Production Image](#️-build-the-production-image)
+  - [🔌 Endpoints](#-endpoints)
+    - [**1. `/getSMS`**](#1-getsms)
+    - [**2. 🔍 `pprof`**](#2--pprof)
+  - [📂 Directory Structure](#-directory-structure)
+  - [🛠️ Development Tools](#️-development-tools)
+    - [**Air** 🌀](#air-)
+  - [📊 Performance Profiling with `pprof`](#-performance-profiling-with-pprof)
+    - [🧠 Collect a CPU Profile](#-collect-a-cpu-profile)
+    - [🛠️ Analyze the Profile](#️-analyze-the-profile)
+  - [📝 Notes](#-notes)
+  - [🤝 Contributing](#-contributing)
+  - [📜 License](#-license)
+  - [🙏 Acknowledgments](#-acknowledgments)
 
 ## 🌟 Features
 
@@ -14,16 +36,12 @@ This project provides an HTTP server to interact with a ZTE router to retrieve S
   - Lightweight, secure production builds.
 - **📝 Environment Configuration**: Fully configurable using `.env` files.
 
----
-
 ## 🛠️ Getting Started
 
 ### 📋 Prerequisites
 
 - **🐳 Docker** and **Docker Compose**: Ensure Docker and Docker Compose are installed on your system.
 - **Go (Optional)**: If running locally without Docker, install Go 1.22 or later.
-
----
 
 ## ⚙️ Configuration
 
@@ -38,13 +56,12 @@ PPROF_LISTEN_ADDR=127.0.0.1:6060     # Address and port for the pprof server
 SERVER_LISTEN_ADDR=127.0.0.1:8080    # Address and port for the main server
 ```
 
----
-
 ## 🧑‍💻 Development
 
 ### 🐳 Run Locally with Docker Compose
 
 1. Build and start the server using Docker Compose:
+
    ```bash
    docker-compose up --build
    ```
@@ -55,18 +72,18 @@ SERVER_LISTEN_ADDR=127.0.0.1:8080    # Address and port for the main server
 
 3. Edit the source files in the `src` directory, and the server will reload automatically (using [Air](https://github.com/cosmtrek/air)).
 
----
-
 ## 🚀 Production Deployment
 
 ### 🏗️ Build the Production Image
 
 1. Build the production-ready Docker image:
+
    ```bash
    docker build -t zte-sms-read .
    ```
 
 2. Run the container:
+
    ```bash
    docker run --env-file .env -p 38080:8080 -p 36060:6060 zte-sms-read
    ```
@@ -74,8 +91,6 @@ SERVER_LISTEN_ADDR=127.0.0.1:8080    # Address and port for the main server
 3. The server will now be running:
    - 🌐 Main server: `http://localhost:38080`
    - 🔍 `pprof` server: `http://localhost:36060`
-
----
 
 ## 🔌 Endpoints
 
@@ -92,6 +107,7 @@ Retrieves SMS messages from the ZTE router.
     - Other tags can filter other types of messages as per router configuration.
 
 - **Example**:
+
   ```bash
   curl "http://localhost:38080/getSMS?page=1&perPage=100&memStore=1&tag=1"
   ```
@@ -107,8 +123,6 @@ Performance profiling interface for debugging and optimization.
   - 🧠 CPU Profile: `http://localhost:36060/debug/pprof/profile`
   - 🛠️ Heap Profile: `http://localhost:36060/debug/pprof/heap`
   - 📜 Goroutines: `http://localhost:36060/debug/pprof/goroutine`
-
----
 
 ## 📂 Directory Structure
 
@@ -126,8 +140,6 @@ Performance profiling interface for debugging and optimization.
 └── README.md                 # Project documentation
 ```
 
----
-
 ## 🛠️ Development Tools
 
 ### **Air** 🌀
@@ -135,11 +147,10 @@ Performance profiling interface for debugging and optimization.
 [Air](https://github.com/cosmtrek/air) is used for hot-reloading during development.
 
 - Install Air:
+
   ```bash
   go install github.com/cosmtrek/air@latest
   ```
-
----
 
 ## 📊 Performance Profiling with `pprof`
 
@@ -161,8 +172,6 @@ go tool pprof cpu.prof
 
 Inside the interactive shell, you can use commands like `top`, `list`, or `web` for analysis.
 
----
-
 ## 📝 Notes
 
 1. **🔒 Security**:
@@ -176,8 +185,6 @@ Inside the interactive shell, you can use commands like `top`, `list`, or `web` 
 3. **📈 Scaling**:
    - The service is designed to be lightweight and easily containerized for scaling.
 
----
-
 ## 🤝 Contributing
 
 1. Fork the repository.
@@ -186,13 +193,9 @@ Inside the interactive shell, you can use commands like `top`, `list`, or `web` 
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a pull request.
 
----
-
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
-
----
 
 ## 🙏 Acknowledgments
 
