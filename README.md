@@ -54,6 +54,7 @@ PASSWORD=supersecret                 # Router password
 ENDPOINT=http://192.168.1.1          # Router base URL
 PPROF_LISTEN_ADDR=127.0.0.1:6060     # Address and port for the pprof server
 SERVER_LISTEN_ADDR=127.0.0.1:8080    # Address and port for the main server
+TZ="Asia/Bangkok"                    # Timezone for the server
 ```
 
 ## 🧑‍💻 Development
