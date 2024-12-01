@@ -1,0 +1,10 @@
+services:
+  zte-sms-read:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "38080:8080"
+      - "36060:6060"
+    depends_on:
+      - redis
