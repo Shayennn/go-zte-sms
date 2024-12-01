@@ -90,7 +90,7 @@ func (zte *ZTEConnector) getLoginLD(ctx context.Context) (string, error) {
 	params := url.Values{
 		"isTest": []string{"false"},
 		"cmd":    []string{"LD"},
-		"_":      []string{fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))},
+		"_":      []string{fmt.Sprintf("%d", time.Now().UnixMilli())},
 	}
 
 	fullURL := zte.baseURL + "goform/goform_get_cmd_process?" + params.Encode()
@@ -217,7 +217,7 @@ func (zte *ZTEConnector) GetSMS(page, perPage, memStore, tag int) ([]ZTESMS, err
 		"mem_store":     []string{strconv.Itoa(memStore)},
 		"tags":          []string{strconv.Itoa(tag)},
 		"order_by":      []string{"order by id desc"},
-		"_":             []string{fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))},
+		"_":             []string{fmt.Sprintf("%d", time.Now().UnixMilli())},
 	}
 
 	fullURL := zte.baseURL + "goform/goform_get_cmd_process?" + params.Encode()
